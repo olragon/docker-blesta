@@ -1,6 +1,7 @@
 FROM php:7.3-apache
 
 ENV BLESTA_VERSION=4.12.3
+ENV BLESTA_NAMESILO_VERSION=1.14.0
 ENV BUILD_DEPS \
     cron \
     g++ \
@@ -72,11 +73,12 @@ RUN mkdir /var/www/app \
     && echo '*/5 * * * * www-data /usr/local/bin/php /var/www/app/blesta/index.php cron' > /etc/cron.d/blesta \
     && echo '0 9 * * 3 www-data [ `date +\%d` -le 7 ] && /usr/bin/curl -sSL https://download.db-ip.com/free/dbip-city-lite-2021-05.mmdb.gz | gunzip > /var/www/app/uploads/system/GeoLite2-City.mmdb' >> /etc/cron.d/blesta
 
-RUN curl -L -o namesilo.zip https://github.com/blesta/module-namesilo/archive/refs/heads/master.zip \
+RUN curl -L -o namesilo.zip https://github.com/blesta/module-namesilo/archive/refs/tags/${BLESTA_NAMESILO_VERSION}.zip \
     && unzip namesilo.zip -d /var/www/docker-backup-app/blesta/components/modules \
-    && mv /var/www/docker-backup-app/blesta/components/modules/module-namesilo-master /var/www/docker-backup-app/blesta/components/modules/namesilo \
-    && chown -R www-data:www-data /var/www/docker-backup-app/blesta/components/modules/namesilo \
+    && mv /var/www/docker-backup-app/blesta/components/modules/module-namesilo-${BLESTA_NAMESILO_VERSION} /var/www/docker-backup-app/blesta/components/modules/namesilo \
     && rm namesilo.zip
+
+RUN mkdir -p /var/www/docker-backup-app/logs_blesta && chown -R www-data:www-data /var/www/docker-backup-app/logs_blesta
 
 VOLUME /var/www/app
 WORKDIR /var/www/app
