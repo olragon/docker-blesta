@@ -48,11 +48,13 @@ RUN apt-get update \
     && echo "ServerTokens Prod" >> /etc/apache2/conf-enabled/security.conf \
     && echo "ServerSignature Off" >> /etc/apache2/conf-enabled/security.conf \
     && ln -sf /proc/self/fd/1 /var/log/apache2/access.log \
-    && ln -sf /proc/self/fd/1 /var/log/apache2/error.log \
-    && curl -sSL -o /tmp/ioncube.zip http://downloads.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-64.zip \
-    && unzip /tmp/ioncube.zip -d /usr/local/lib/php/extensions/* \
-    && rm -Rf /tmp/ioncube.zip \
-    && echo "zend_extension=ioncube/ioncube_loader_lin_7.2.so" > /usr/local/etc/php/conf.d/00_docker-php-ext-ioncube.ini
+    && ln -sf /proc/self/fd/1 /var/log/apache2/error.log
+
+RUN curl -o ioncube.tar.gz http://downloads.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-64.tar.gz \
+    && tar -xvvzf ioncube.tar.gz \
+    && mv ioncube/ioncube_loader_lin_5.6.so `php-config --extension-dir` \
+    && rm -Rf ioncube.tar.gz ioncube \
+    && docker-php-ext-enable ioncube_loader_lin_5.6
 
 ADD supervisord.conf /etc/supervisor/supervisord.conf
 ADD logformat.conf /etc/apache2/conf-enabled/logformat.conf
