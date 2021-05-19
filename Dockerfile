@@ -73,9 +73,9 @@ RUN mkdir /var/www/app \
     && echo '0 9 * * 3 www-data [ `date +\%d` -le 7 ] && /usr/bin/curl -sSL https://download.db-ip.com/free/dbip-city-lite-2021-05.mmdb.gz | gunzip > /var/www/app/uploads/system/GeoLite2-City.mmdb' >> /etc/cron.d/blesta
 
 RUN curl -L -o namesilo.zip https://github.com/blesta/module-namesilo/archive/refs/heads/master.zip \
-    && unzip namesilo.zip -d /var/www/app/blesta/components/modules \
-    && mv /var/www/app/blesta/components/modules/module-namesilo-master /var/www/app/blesta/components/modules/namesilo \
-    && chown -R www-data:www-data /var/www/app/blesta/components/modules/namesilo \
+    && unzip namesilo.zip -d /var/www/docker-backup-app/blesta/components/modules \
+    && mv /var/www/docker-backup-app/blesta/components/modules/module-namesilo-master /var/www/docker-backup-app/blesta/components/modules/namesilo \
+    && chown -R www-data:www-data /var/www/docker-backup-app/blesta/components/modules/namesilo \
     && rm namesilo.zip
 
 VOLUME /var/www/app
