@@ -56,7 +56,7 @@ fi
 # download the GeoLite2 database if not present
 if [ ! -e /var/www/app/uploads/system/GeoLite2-City.mmdb ]; then
   echo 'downloading GeoLite2 database...'
-  /usr/bin/curl -sSL https://geolite.maxmind.com/download/geoip/database/GeoLite2-City.tar.gz | gunzip > /var/www/app/uploads/system/GeoLite2-City.mmdb
+  /usr/bin/curl -sSL https://download.db-ip.com/free/dbip-city-lite-2021-05.mmdb.gz | gunzip > /var/www/app/uploads/system/GeoLite2-City.mmdb
 fi 
 
 echo 'start'
