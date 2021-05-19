@@ -33,7 +33,7 @@ RUN apt-get update \
     && apt-get install --yes --no-install-recommends $BUILD_DEPS \
     && docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ \
     && docker-php-ext-configure imap --with-kerberos --with-imap-ssl \
-    && docker-php-ext-install pdo pdo_mysql curl gmp imap json ldap mbstring simplexml gd \
+    # && docker-php-ext-install pdo pdo_mysql curl gmp imap json ldap mbstring simplexml gd \
     && yes '' | pecl install -f mailparse mcrypt-1.0.1 \
     && docker-php-ext-enable mcrypt \
     && a2enmod rewrite \
