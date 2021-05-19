@@ -1,33 +1,33 @@
-FROM php:7.2-apache
+FROM php:7.4-apache
 
-ENV BLESTA_VERSION=4.7.2
+ENV BLESTA_VERSION=5.0.4
 ENV BUILD_DEPS \
-        cron \
-        g++ \
-        gettext \
-        libicu-dev \
-        openssl \
-        libc-client-dev \
-        libkrb5-dev \
-        libxml2-dev \
-        libfreetype6-dev \
-        libgd-dev \
-        libmcrypt-dev \
-        bzip2 \
-        libbz2-dev \
-        libtidy-dev \
-        libcurl4-openssl-dev \
-        libz-dev \
-        libmemcached-dev \
-        libxslt-dev \
-        libgmp-dev \
-        libldap2-dev \
-        python3 \
-        python3-pycurl \
-        unzip \
-        wget \
-        supervisor \
-        git
+    cron \
+    g++ \
+    gettext \
+    libicu-dev \
+    openssl \
+    libc-client-dev \
+    libkrb5-dev \
+    libxml2-dev \
+    libfreetype6-dev \
+    libgd-dev \
+    libmcrypt-dev \
+    bzip2 \
+    libbz2-dev \
+    libtidy-dev \
+    libcurl4-openssl-dev \
+    libz-dev \
+    libmemcached-dev \
+    libxslt-dev \
+    libgmp-dev \
+    libldap2-dev \
+    python3 \
+    python3-pycurl \
+    unzip \
+    wget \
+    supervisor \
+    git
 
 RUN apt-get update \
     && apt-get install --yes --no-install-recommends $BUILD_DEPS \
