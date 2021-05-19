@@ -52,9 +52,9 @@ RUN apt-get update \
 
 RUN curl -o ioncube.tar.gz http://downloads.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-64.tar.gz \
     && tar -xvvzf ioncube.tar.gz \
-    && mv ioncube/ioncube_loader_lin_5.6.so `php-config --extension-dir` \
+    && mv ioncube/ioncube_loader_lin_7.4.so `php-config --extension-dir` \
     && rm -Rf ioncube.tar.gz ioncube \
-    && docker-php-ext-enable ioncube_loader_lin_5.6
+    && docker-php-ext-enable ioncube_loader_lin_7.4
 
 ADD supervisord.conf /etc/supervisor/supervisord.conf
 ADD logformat.conf /etc/apache2/conf-enabled/logformat.conf
